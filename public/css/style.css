@@ -1,0 +1,77 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Mingzat', sans-serif;
+}
+
+#phone-model{
+    height: 500px;
+    width: 250px;
+    border: 4px solid rgb(59, 59, 59);
+    border-radius: 35px;
+    display: grid;
+    grid-template-rows: 1fr 5fr 12fr;
+    overflow: hidden;
+    color: #353631;
+    -webkit-box-shadow: -9px 13px 15px -1px rgba(0,0,0,0.47); 
+    box-shadow: -9px 13px 15px -1px rgba(0,0,0,0.47);
+    background-color: #f1f3ee;
+}
+
+#info_model{
+    display: flex;
+    justify-content: space-between;
+    background-color: #dfe5db;
+    font-size: 11px;
+    font-weight: bold;
+}
+.ml-2{
+    margin-left: 10px;
+}
+.mr-2{
+    margin-right: 10px;
+}
+#display_calc{
+    background-color: #dfe5db;
+    border-bottom-right-radius: 20px ;
+    border-bottom-left-radius: 20px ;
+    display: flex;
+    justify-content: end;
+
+}
+#output_display{
+    width: fit-content;
+    height: 80%;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+   
+}
+#controlers{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0px;
+    gap: 5px;
+}
+
+.btn_style{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #fffffb;
+    transition: 0.2s ease ;
+}
+
+.btn_style:hover{
+    cursor: pointer;
+    background-color: #dfe5db;
+}
