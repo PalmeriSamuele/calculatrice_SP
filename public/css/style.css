@@ -17,8 +17,8 @@ body{
     grid-template-rows: 1fr 5fr 12fr;
     overflow: hidden;
     color: #353631;
-    -webkit-box-shadow: -11px 15px 15px -1px rgba(98,98,98,0.84); 
-    box-shadow: -11px 15px 15px -1px rgba(98,98,98,0.84);
+    -webkit-box-shadow: 1px 23px 25px 3px rgba(0,0,0,0.55); 
+    box-shadow: 1px 23px 25px 3px rgba(0,0,0,0.55);
     
     background-color: #f1f3ee;
 }
