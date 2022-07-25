@@ -8,12 +8,28 @@ document.body.append(smartphone_model);
 let info = document.createElement('div');
 info.id = 'info_model';
 
+let newDate = new Date();
+let min = newDate.getMinutes();
+let _min = String(min);
+if (_min.length == 1){
+    _min += '0';
+    _min = reverseString(_min);
+
+}
+
+
+function reverseString(str) {
+    var splitString = str.split("");
+    var reverseArray = splitString.reverse();
+    var joinArray = reverseArray.join("");
+    return joinArray; 
+}
 
 let hour = document.createElement('p');
-hour.innerHTML = '10:02';
+hour.innerHTML = `${newDate.getHours()}:${_min}`;
 
 let others = document.createElement('p');
-others.innerHTML = 'wifi notifs';
+others.innerHTML = `<i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-comment-dots"></i> <i class="fa-solid fa-phone"></i>`;
 
 hour.classList.add('ml-2');
 others.classList.add('mr-2');
@@ -28,6 +44,7 @@ display.id = 'display_calc';
 
 let output = document.createElement('div');
 output.id = 'output_display';
+output.classList.add('mr-2');
 display.append(output);
 smartphone_model.append(display);
 
@@ -59,7 +76,13 @@ let btn18 = document.createElement('div');
 let btn19 = document.createElement('div');
 
 btn0.innerHTML = 'AC';
-btn1.innerHTML = '()';
+btn0.addEventListener('click',function(){
+    output.innerHTML = '';
+})
+btn1.innerHTML = 'x²';
+btn1.addEventListener('click',function(){
+    output.innerHTML =  output.innerHTML**2;
+})
 btn2.innerHTML = '%';
 btn3.innerHTML = 'mod';
 btn4.innerHTML = '7';
@@ -76,9 +99,45 @@ btn13.innerHTML = '2';
 btn14.innerHTML = '3';
 btn15.innerHTML = '+';
 btn16.innerHTML = '0';
-btn17.innerHTML = '.';
-btn18.innerHTML = '<';
+btn17.innerHTML = '';
+btn18.innerHTML = `<i class="fa-solid fa-delete-left"></i>`;
+btn18.addEventListener('click',function(){
+    output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length-1)
+})
 btn19.innerHTML = '=';
+btn19.addEventListener('click',function(){
+    if (output.innerHTML.split('x').length > 1){
+        let vals = output.innerHTML.split('x');
+        let val = vals[0]*vals[1];
+        output.innerHTML = val.toFixed(2);
+    }
+    if (output.innerHTML.split('+').length > 1){
+        let vals = output.innerHTML.split('+');
+        let val = Number(vals[0])+ Number(vals[1]);
+        output.innerHTML = val.toFixed(2);;
+    }
+    if (output.innerHTML.split('-').length > 1){
+        let vals = output.innerHTML.split('-');
+        let val = vals[0]-vals[1];
+        output.innerHTML = val.toFixed(2);
+    }
+    if (output.innerHTML.split('%').length > 1){
+        let vals = output.innerHTML.split('%');
+        let val = vals[0]/vals[1];
+        output.innerHTML = val.toFixed(2);
+    }
+    if (output.innerHTML.split('mod').length > 1){
+        let vals = output.innerHTML.split('mod');
+        let val = vals[0]%vals[1];
+        output.innerHTML = val.toFixed(2);
+    }
+
+    output.innerHTML = _eval(output.innerHTML)
+})
+
+function _eval(val){
+    return parseInt(val);
+}
 
 btn0.classList.add('btn_style');
 btn1.classList.add('btn_style');
@@ -127,9 +186,13 @@ controlers_box.append(btn19);
 
 smartphone_model.append(controlers_box);
 
-btns = document.getElementsByClassName('btn_style');
-btns.forEach(btn => {
-    btn.addEventListener('click',function(){
+let btns = document.getElementsByClassName('btn_style');
+for (let i = 0; i < btns.length; i++) {
+    if (btns[i].innerHTML != 'x²' &&  btns[i].innerHTML != 'AC' &&  btns[i].innerHTML != '=' &&  btns[i].innerHTML != `<i class="fa-solid fa-delete-left"></i>`){
+        btns[i].addEventListener('click',function(){
         
-    })
-});
+            output.innerHTML += btns[i].innerHTML;
+
+        })
+    }
+};
