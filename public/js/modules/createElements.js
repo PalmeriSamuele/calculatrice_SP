@@ -17,7 +17,7 @@ if (_min.length == 1){
 
 }
 
-
+// methode aui retourne l'inverse d'une chaine de caractere
 function reverseString(str) {
     var splitString = str.split("");
     var reverseArray = splitString.reverse();
@@ -44,6 +44,7 @@ display.id = 'display_calc';
 
 let output = document.createElement('div');
 output.id = 'output_display';
+// output.textContent = '0';
 output.classList.add('mr-2');
 display.append(output);
 smartphone_model.append(display);
@@ -52,7 +53,7 @@ smartphone_model.append(display);
 
 let controlers_box = document.createElement('div');
 controlers_box.id = 'controlers';
-
+// on cree tous les btns
 let btn0 = document.createElement('div');
 let btn1 = document.createElement('div');
 let btn2 = document.createElement('div');
@@ -81,10 +82,11 @@ btn0.addEventListener('click',function(){
 })
 btn1.innerHTML = 'x²';
 btn1.addEventListener('click',function(){
-    output.innerHTML =  (Number(output.innerHTML.toString().replaceAll(',','.')) **2).toString().replaceAll('.',',');  // supp
+    output.innerHTML =  (Number(output.innerHTML.toString().replaceAll(',','.')) **2).toFixed(2).toString().replaceAll('.',',');  // supp
 })
 btn2.innerHTML = '/';
 btn3.innerHTML = '%';
+
 btn4.innerHTML = '7';
 btn5.innerHTML = '8';
 btn6.innerHTML = '9';
@@ -101,47 +103,45 @@ btn15.innerHTML = '+';
 btn16.innerHTML = '0';
 btn17.innerHTML = ',';
 btn18.innerHTML = `<i class="fa-solid fa-delete-left"></i>`;
+
 btn18.addEventListener('click',function(){
-    output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length-1)
+    output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length-1);  // supprime le dernier caractere
 })
 btn19.innerHTML = '=';
 btn19.addEventListener('click',function(){
     let vals,val;
-    output.innerHTML = output.innerHTML.replaceAll(',','.');
-    if (output.innerHTML.split('*').length > 1){
+    output.innerHTML = output.innerHTML.replaceAll(',','.');   // on change les virgules par des points pour les  calcules
+    if (output.innerHTML.split('*').length > 1){   // si le output est une multiplication
         
         vals = output.innerHTML.split('*');
         val = vals[0]*vals[1];
         
     }
-    else if (output.innerHTML.split('+').length > 1){
+    else if (output.innerHTML.split('+').length > 1){ // si le output est une addition
         vals = output.innerHTML.split('+');
         val = Number(vals[0])+ Number(vals[1]);
   
     }
-    else if (output.innerHTML.split('-').length > 1){
+    else if (output.innerHTML.split('-').length > 1){ // si le output est une soustraction
         vals = output.innerHTML.split('-');
         val = vals[0]-vals[1];
      
     }
-    else if (output.innerHTML.split('/').length > 1){
+    else if (output.innerHTML.split('/').length > 1){  // si le output est une division
         vals = output.innerHTML.split('/');
         val = vals[0]/vals[1];
      
     }
-    else if (output.innerHTML.split('%').length > 1){
+    else if (output.innerHTML.split('%').length > 1){  // si le output est un modulo
         vals = output.innerHTML.split('%');
         val = vals[0]%vals[1];
        
     }
 
-    output.innerHTML = val.toFixed(2).toString().replaceAll('.',',');
+    output.innerHTML = val.toFixed(2).toString().replaceAll('.',',');   // on remet la virgule quand on affiche la reponse
 
 })
 
-function _eval(val){
-    return parseInt(val);
-}
 
 btn0.classList.add('btn_style');
 btn1.classList.add('btn_style');
@@ -163,8 +163,9 @@ btn15.classList.add('btn_style');
 btn16.classList.add('btn_style');
 btn17.classList.add('btn_style');
 btn18.classList.add('btn_style');
+btn18.id = 'del_btn';
 btn19.classList.add('btn_style');
-
+btn19.id = 'enter_btn';
 controlers_box.append(btn0);
 controlers_box.append(btn1);
 controlers_box.append(btn2);
@@ -200,3 +201,15 @@ for (let i = 0; i < btns.length; i++) {
         })
     }
 };
+
+document.addEventListener('keydown',function(e){
+    console.log(e.key)
+    if ('0123456789/%+-*'.includes(e.key)){
+      
+        output.innerText += e.key;
+    }
+    else if (e.key =='Backspace'){
+        output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length-1);
+    }
+    
+})

@@ -38,8 +38,8 @@ body{
 }
 #display_calc{
     background-color: #dfe5db;
-    border-bottom-right-radius: 20px ;
-    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 30px ;
+    border-bottom-left-radius: 30px ;
     display: flex;
     justify-content: end;
 
@@ -50,7 +50,15 @@ body{
     font-size: 40px;
     display: flex;
     align-items: center;
+    overflow: hidden;
    
+}
+
+#del_btn:hover{
+    background-color: #c96f4c;
+}
+#enter_btn:hover{
+    background-color: #8ac94c;
 }
 #controlers{
     width: 100%;
@@ -74,5 +82,6 @@ body{
 
 .btn_style:hover{
     cursor: pointer;
-    background-color: #cae3e4;
+    color:#fffffb ;
+    background-color: #3c4243;
 }
