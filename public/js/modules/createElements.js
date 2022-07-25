@@ -81,14 +81,14 @@ btn0.addEventListener('click',function(){
 })
 btn1.innerHTML = 'x²';
 btn1.addEventListener('click',function(){
-    output.innerHTML =  output.innerHTML**2;
+    output.innerHTML =  (Number(output.innerHTML.toString().replaceAll(',','.')) **2).toString().replaceAll('.',',');  // supp
 })
-btn2.innerHTML = '%';
-btn3.innerHTML = 'mod';
+btn2.innerHTML = '/';
+btn3.innerHTML = '%';
 btn4.innerHTML = '7';
 btn5.innerHTML = '8';
 btn6.innerHTML = '9';
-btn7.innerHTML = 'x';
+btn7.innerHTML = '*';
 btn8.innerHTML = '4';
 btn9.innerHTML = '5';
 
@@ -99,40 +99,44 @@ btn13.innerHTML = '2';
 btn14.innerHTML = '3';
 btn15.innerHTML = '+';
 btn16.innerHTML = '0';
-btn17.innerHTML = '';
+btn17.innerHTML = ',';
 btn18.innerHTML = `<i class="fa-solid fa-delete-left"></i>`;
 btn18.addEventListener('click',function(){
     output.innerHTML = output.innerHTML.substring(0, output.innerHTML.length-1)
 })
 btn19.innerHTML = '=';
 btn19.addEventListener('click',function(){
-    if (output.innerHTML.split('x').length > 1){
-        let vals = output.innerHTML.split('x');
-        let val = vals[0]*vals[1];
-        output.innerHTML = val.toFixed(2);
+    let vals,val;
+    output.innerHTML = output.innerHTML.replaceAll(',','.');
+    if (output.innerHTML.split('*').length > 1){
+        
+        vals = output.innerHTML.split('*');
+        val = vals[0]*vals[1];
+        
     }
-    if (output.innerHTML.split('+').length > 1){
-        let vals = output.innerHTML.split('+');
-        let val = Number(vals[0])+ Number(vals[1]);
-        output.innerHTML = val.toFixed(2);;
+    else if (output.innerHTML.split('+').length > 1){
+        vals = output.innerHTML.split('+');
+        val = Number(vals[0])+ Number(vals[1]);
+  
     }
-    if (output.innerHTML.split('-').length > 1){
-        let vals = output.innerHTML.split('-');
-        let val = vals[0]-vals[1];
-        output.innerHTML = val.toFixed(2);
+    else if (output.innerHTML.split('-').length > 1){
+        vals = output.innerHTML.split('-');
+        val = vals[0]-vals[1];
+     
     }
-    if (output.innerHTML.split('%').length > 1){
-        let vals = output.innerHTML.split('%');
-        let val = vals[0]/vals[1];
-        output.innerHTML = val.toFixed(2);
+    else if (output.innerHTML.split('/').length > 1){
+        vals = output.innerHTML.split('/');
+        val = vals[0]/vals[1];
+     
     }
-    if (output.innerHTML.split('mod').length > 1){
-        let vals = output.innerHTML.split('mod');
-        let val = vals[0]%vals[1];
-        output.innerHTML = val.toFixed(2);
+    else if (output.innerHTML.split('%').length > 1){
+        vals = output.innerHTML.split('%');
+        val = vals[0]%vals[1];
+       
     }
 
-    output.innerHTML = _eval(output.innerHTML)
+    output.innerHTML = val.toFixed(2).toString().replaceAll('.',',');
+
 })
 
 function _eval(val){
